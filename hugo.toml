@@ -34,7 +34,7 @@ enableRobotsTXT = true
     title = "Lovis blog"
     languageName = "english"
     LanguageCode = "en-US"
-    contentDir = "content/en"
+    contentDir = "content.en"
     [languages.en.params]
       madeWith = "built with [hugo](https://gohugo.io) and [Bear Cub](https://github.com/clente/hugo-bearcub)"
 
