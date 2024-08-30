@@ -43,7 +43,7 @@ enableRobotsTXT = true
   description = "Blog für meine halbfertigen Gedanken"
 
   # The path to your favicon
-  favicon = "https://lovirent.eu/facivon.ico"
+  favicon = "favicon.ico"
 
   # These images will show up when services want to generate a preview of a link
   # to your site. Ignored if `generateSocialCard = true`. For more information
@@ -74,7 +74,7 @@ enableRobotsTXT = true
   # for posts that don't have `images` defined in their front matter; By setting
   # `generateSocialCard` to false, you can prevent this behavior. For more
   # information see layouts/partials/social_card.html
-  generateSocialCard = true
+  generateSocialCard = false
 
   # Author metadata. This is mostly used for the RSS feed of your site, but the
   # email is also added to the footer of each post. You can hide the "reply to"
