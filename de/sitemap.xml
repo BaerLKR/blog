@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.lovirent.eu/posts/</loc>
-    <lastmod>2024-08-23T00:30:21+02:00</lastmod>
+    <lastmod>2024-08-30T23:33:05+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-US"
@@ -26,6 +26,9 @@
                 hreflang="de"
                 href="https://blog.lovirent.eu/tags/"
                 />
+  </url><url>
+    <loc>https://blog.lovirent.eu/posts/first-post/</loc>
+    <lastmod>2024-08-30T23:33:05+02:00</lastmod>
   </url><url>
     <loc>https://blog.lovirent.eu/</loc>
     <lastmod>2024-08-21T14:38:06+02:00</lastmod>
