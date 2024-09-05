@@ -2,53 +2,53 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.lovirent.eu/en/posts/</loc>
+    <loc>http://localhost:1313/en/posts/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="https://blog.lovirent.eu/posts/"
+                href="http://localhost:1313/posts/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-US"
-                href="https://blog.lovirent.eu/en/posts/"
+                href="http://localhost:1313/en/posts/"
                 />
   </url><url>
-    <loc>https://blog.lovirent.eu/en/tags/</loc>
+    <loc>http://localhost:1313/en/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="https://blog.lovirent.eu/tags/"
+                href="http://localhost:1313/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-US"
-                href="https://blog.lovirent.eu/en/tags/"
+                href="http://localhost:1313/en/tags/"
                 />
   </url><url>
-    <loc>https://blog.lovirent.eu/en/</loc>
+    <loc>http://localhost:1313/en/</loc>
     <lastmod>2024-08-21T14:42:55+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="https://blog.lovirent.eu/"
+                href="http://localhost:1313/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-US"
-                href="https://blog.lovirent.eu/en/"
+                href="http://localhost:1313/en/"
                 />
   </url><url>
-    <loc>https://blog.lovirent.eu/en/categories/</loc>
+    <loc>http://localhost:1313/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="de"
-                href="https://blog.lovirent.eu/categories/"
+                href="http://localhost:1313/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-US"
-                href="https://blog.lovirent.eu/en/categories/"
+                href="http://localhost:1313/en/categories/"
                 />
   </url>
 </urlset>

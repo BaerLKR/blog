@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Lovis&#39; Blog</title>
-    <link>https://blog.lovirent.eu/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on Lovis&#39; Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
     <managingEditor>blog@lovirent.eu (Lovis Rentsch)</managingEditor>
     <webMaster>blog@lovirent.eu (Lovis Rentsch)</webMaster>
     <copyright>Lovis Rentsch (CC BY-SA 4.0)</copyright>
-    <atom:link href="https://blog.lovirent.eu/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

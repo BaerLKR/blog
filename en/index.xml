@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Lovis blog</title>
-    <link>https://blog.lovirent.eu/en/</link>
+    <link>http://localhost:1313/en/</link>
     <description>Recent content on Lovis blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,6 +10,6 @@
     <webMaster>blog@lovirent.eu (Lovis Rentsch)</webMaster>
     <copyright>Lovis Rentsch (CC BY-SA 4.0)</copyright>
     <lastBuildDate>Wed, 21 Aug 2024 14:42:55 +0200</lastBuildDate>
-    <atom:link href="https://blog.lovirent.eu/en/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/en/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

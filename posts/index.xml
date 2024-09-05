@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Blog on Lovis&#39; Blog</title>
-    <link>https://blog.lovirent.eu/posts/</link>
+    <link>http://localhost:1313/posts/</link>
     <description>Recent content in Blog on Lovis&#39; Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
@@ -10,12 +10,12 @@
     <webMaster>blog@lovirent.eu (Lovis Rentsch)</webMaster>
     <copyright>Lovis Rentsch (CC BY-SA 4.0)</copyright>
     <lastBuildDate>Fri, 30 Aug 2024 23:33:05 +0200</lastBuildDate>
-    <atom:link href="https://blog.lovirent.eu/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>erster Eintrag</title>
-      <link>https://blog.lovirent.eu/posts/first-post/</link>
+      <link>http://localhost:1313/posts/first-post/</link>
       <pubDate>Fri, 30 Aug 2024 23:33:05 +0200</pubDate><author>blog@lovirent.eu (Lovis Rentsch)</author>
-      <guid>https://blog.lovirent.eu/posts/first-post/</guid>
+      <guid>http://localhost:1313/posts/first-post/</guid>
       <description>Wilkommen Ich habe den Blog neu aufgesetzt, weil der alte nicht mehr wirklich maintainable war. Diesen habe ich jetzt mit einer nix flake so paketiert, dass es (hoffentlich) nicht so schnell kaputt geht. Außerdem hätte ich beim alten den RSS Feed fixen müssen und da war ich recht ratlos und wollte auch nicht so viel Energie rein stecken.&#xA;Hier werde ich unregelmässig, eben immer wenn sich die Gelegenheit ergibt, teilen wenn ich etwas gefunden habe was mich begeistert und wovon ich denke, dass es andere interessieren könnte.</description>
       <content:encoded><![CDATA[<h1 id="wilkommen">Wilkommen</h1>
 <p>Ich habe den Blog neu aufgesetzt, weil der alte nicht mehr wirklich maintainable war. Diesen habe ich jetzt mit einer nix flake
