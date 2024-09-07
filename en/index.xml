@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Lovis blog</title>
-    <link>http://localhost:1313/en/</link>
+    <link>https://blog.lovirent.eu/en/</link>
     <description>Recent content on Lovis blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
@@ -10,6 +10,48 @@
     <webMaster>blog@lovirent.eu (Lovis Rentsch)</webMaster>
     <copyright>Lovis Rentsch (CC BY-SA 4.0)</copyright>
     <lastBuildDate>Wed, 21 Aug 2024 14:42:55 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/en/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.lovirent.eu/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Monitor</title>
+      <link>https://blog.lovirent.eu/en/posts/monitor/</link>
+      <pubDate>Sat, 07 Sep 2024 16:27:35 +0200</pubDate><author>blog@lovirent.eu (Lovis Rentsch)</author>
+      <guid>https://blog.lovirent.eu/en/posts/monitor/</guid>
+      <description>Ok so hear me out, this is very scuffed but I think it is funny and also maybe sometimes somewhat useful. I don&amp;rsquo;t own a second monitor but I have an old thinkpad. So I thought it would be a good idea to try to make it my second monitor. The first thing I had to do is to get a second output, a virtual display that gets rendered by my computer.</description>
+      <content:encoded><![CDATA[<p>Ok so hear me out, this is very scuffed but I think it is funny and also maybe sometimes somewhat useful.
+I don&rsquo;t own a second monitor but I have an old thinkpad. So I thought it would be a good idea to try to make it my second monitor. The first thing I had to do is to get
+a second output, a virtual display that gets rendered by my computer. I was not able to do that in software so I bought a HDMI dummi dongle (~7€). Then I tired to stream
+that to my laptop over the network. The first option I tried was <a href="https://github.com/H-M-H/Weylus">weylus</a>. It worked but the display selction (choosing what HDMI) output
+gets streamed to the laptop) was unreliable and the performance on the client wasn&rsquo;t too great either. Probably because of all the features that came with it but that I
+did not use. To be fair, this is not really it&rsquo;s intendet usecase.
+Then finally I used the tool, the elephant in the room, the programm literally made to do this (lol). I tried setting up VNC before in this context but it did not work
+out. But it really wasn&rsquo;t hard.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nix" data-lang="nix"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1"># this is the script I use to start the service on my host machine</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="c1">#! /usr/bin/env nix-shell</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="c1">#! nix-shell -p wayvnc novnc -i bash</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="n">wayvnc</span><span class="err">&amp;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="n">novnc</span></span></span></code></pre></div><p>Maybe I should just quickly go over that script (if you can even call it that). I pull the dependencies (<code>wayyvnc</code> and <code>novnc</code>) from <code>nixpkgs</code> using the
+<a href="https://nixos.wiki/wiki/Nix-shell_shebang">nix-shell shebang</a>. Then I start <code>wayvnc</code> (a wayland vnc server) in the background and also start <code>novnc</code>. The latter is a
+tool to simplify connecting to a VNC stream. That way I don&rsquo;t need any dependencies on the client side exept for a web browser.</p>
+<p>That setup worked right out of the box, choosing the second virtual screen and streaming it with out any issues.
+It has to be said though that both devices need to be in the same LAN and the server device has to disable the firewall
+(or open some ports, but I am lazy and just disable it when I want to use this cursed setup); the stream is not protected, meaning that anyone on the local netowrk
+can look at the screen that is being transferred.
+Also the performance isn&rsquo;t great. It is better than with waylus and it is totally acceptale for the usecases I have. For example opening the docs while still being able
+to have the code open/ontinue programming, having reference material for what you are doing on the main monitor. Sadly it is not enought to stream video in a watchable
+bitrate (but it is enougth to render nvim with a decent refresh rate so I could write this post on my &ldquo;second monitor&rdquo;) but maybe having better connection to the router
+could fix that.</p>
+<p>To conclude this article I just want to say that I am aware how hidious this is. But sometimes it comes in handy, also I had the time and my laptop was laying around.
+So this was a fun little project. Have a picture of my not-scatchy-at-all setup:</p>
+<p><img alt="from the front" src="/20240907_172419.jpg">
+<img alt="from the side" src="/20240907_172440.jpg"></p>
+<p><em>(yes everything is held up by a surprisingly well fitting box and a formulary)</em></p>
+]]></content:encoded>
+    </item>
   </channel>
 </rss>

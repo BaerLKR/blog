@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Categories on Lovis blog</title>
-    <link>http://localhost:1313/en/categories/</link>
+    <link>https://blog.lovirent.eu/en/categories/</link>
     <description>Recent content in Categories on Lovis blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <managingEditor>blog@lovirent.eu (Lovis Rentsch)</managingEditor>
     <webMaster>blog@lovirent.eu (Lovis Rentsch)</webMaster>
     <copyright>Lovis Rentsch (CC BY-SA 4.0)</copyright>
-    <atom:link href="http://localhost:1313/en/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.lovirent.eu/en/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
