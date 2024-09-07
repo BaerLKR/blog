@@ -12,3 +12,6 @@ the things I post are somewhat factual but in reality I don't really know what I
 After all those are just my half baked ideas.
 
 Most of my posts will probably be in [german](/) but some may also be written in/translated to english.
+
+
+*[to the posts](/posts)*
