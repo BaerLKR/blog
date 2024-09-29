@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="https://blog.lovirent.eu/favicon.ico" />
+<title>erste Woche Haskell | Lovis&#39; Blog</title>
+<meta name="title" content="erste Woche Haskell" />
+<meta name="description" content="Ach ja, Haskell. Es stand schon länger auf meiner Todo-Liste Haskell zu lernen. Es übt eine besondere Faszination aus als Programmiersprache die so anders funktioniert. Auch als possionierter OOP Hater, ohne jemals wirklich OOP Code geschrieben zu haben musste ich irgendwann auch mal bei Haskell landen.
+Hier will ich also meine Erfahrungen nach so rund einer Woche festhalten. Also, das kann auch alles falsch sein was ich hier schreibe.
+funktionelle Programmierung Was mich, wie ich schon ansprach, besonders reitzt ist der funktionelle Aspekt der Sprache." />
+<meta name="author" content="" />
+<meta name="keywords" content="" />
+
+
+
+
+
+
+  
+  <meta property="og:url" content="https://blog.lovirent.eu/posts/first-haskell/">
+  <meta property="og:site_name" content="Lovis&#39; Blog">
+  <meta property="og:title" content="erste Woche Haskell">
+  <meta property="og:description" content="Ach ja, Haskell. Es stand schon länger auf meiner Todo-Liste Haskell zu lernen. Es übt eine besondere Faszination aus als Programmiersprache die so anders funktioniert. Auch als possionierter OOP Hater, ohne jemals wirklich OOP Code geschrieben zu haben musste ich irgendwann auch mal bei Haskell landen.
+Hier will ich also meine Erfahrungen nach so rund einer Woche festhalten. Also, das kann auch alles falsch sein was ich hier schreibe.
+funktionelle Programmierung Was mich, wie ich schon ansprach, besonders reitzt ist der funktionelle Aspekt der Sprache.">
+  <meta property="og:locale" content="de">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-09-24T10:05:34+02:00">
+    <meta property="article:modified_time" content="2024-09-24T10:05:34+02:00">
+    <meta property="og:image" content="https://blog.lovirent.eu/images/share.webp">
+
+
+  
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://blog.lovirent.eu/images/share.webp">
+  <meta name="twitter:title" content="erste Woche Haskell">
+  <meta name="twitter:description" content="Ach ja, Haskell. Es stand schon länger auf meiner Todo-Liste Haskell zu lernen. Es übt eine besondere Faszination aus als Programmiersprache die so anders funktioniert. Auch als possionierter OOP Hater, ohne jemals wirklich OOP Code geschrieben zu haben musste ich irgendwann auch mal bei Haskell landen.
+Hier will ich also meine Erfahrungen nach so rund einer Woche festhalten. Also, das kann auch alles falsch sein was ich hier schreibe.
+funktionelle Programmierung Was mich, wie ich schon ansprach, besonders reitzt ist der funktionelle Aspekt der Sprache.">
+
+
+  
+  
+  <meta itemprop="name" content="erste Woche Haskell">
+  <meta itemprop="description" content="Ach ja, Haskell. Es stand schon länger auf meiner Todo-Liste Haskell zu lernen. Es übt eine besondere Faszination aus als Programmiersprache die so anders funktioniert. Auch als possionierter OOP Hater, ohne jemals wirklich OOP Code geschrieben zu haben musste ich irgendwann auch mal bei Haskell landen.
+Hier will ich also meine Erfahrungen nach so rund einer Woche festhalten. Also, das kann auch alles falsch sein was ich hier schreibe.
+funktionelle Programmierung Was mich, wie ich schon ansprach, besonders reitzt ist der funktionelle Aspekt der Sprache.">
+  <meta itemprop="datePublished" content="2024-09-24T10:05:34+02:00">
+  <meta itemprop="dateModified" content="2024-09-24T10:05:34+02:00">
+  <meta itemprop="wordCount" content="512">
+  <meta itemprop="image" content="https://blog.lovirent.eu/images/share.webp">
+
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  
+  <link href="/original.min.css" rel="stylesheet">
+
+  
+    
+    <link href="/syntax.min.css" rel="stylesheet">
+  
+
+  
+
+  
+</head>
+
+<body>
+  <header><a class="skip-link" href="#main-content">Überspringen zum Hauptinhalt</a>
+
+<a href="/" class="title"><h1>Lovis&#39; Blog</h1></a>
+<nav>
+  <a href="/posts/">Blog</a>
+
+  <a href="/tags/">Tags</a>
+
+<a href='https://blog.lovirent.eu/index.xml'>RSS</a>
+
+
+
+
+
+
+
+  
+    
+    
+      <a class="disabled" role="link" aria-disabled="true">english</a>
+    
+  
+
+</nav>
+</header>
+  <main id="main-content">
+
+<h1>erste Woche Haskell</h1>
+<p class="byline">
+  <time datetime='2024-09-24' pubdate>
+    24.09.2024
+  </time>
+  
+</p>
+
+<content>
+  <p>Ach ja, Haskell. Es stand schon länger auf meiner Todo-Liste Haskell zu lernen. Es
+übt eine besondere Faszination aus als Programmiersprache die so anders funktioniert.
+Auch als possionierter OOP Hater, ohne jemals wirklich OOP Code geschrieben zu haben
+musste ich irgendwann auch mal bei Haskell landen.</p>
+<p>Hier will ich also meine Erfahrungen nach so rund einer Woche festhalten. Also,
+das kann auch alles falsch sein was ich hier schreibe.</p>
+<h2 id="funktionelle-programmierung">funktionelle Programmierung</h2>
+<p>Was mich, wie ich schon ansprach, besonders reitzt ist der funktionelle Aspekt der Sprache.
+Aber ich hatte deutlich weniger Probleme mit Rekursion als ich erwartet habe. Ich habe
+noch nicht durchschaut wie <code>fold</code> effektiv zu verwenden ist. Die anderen Seiten der
+Sprache, bis auf die Syntax, waren mir schon recht bekannt. Vorallem das Typeclass
+system ähnelt dem rust Trait System sehr. Das liegt wohl daran, dass Rust es sich von
+Haskell abgeschaut. Das Funktionen &ldquo;first-class-citizens&rdquo; sind kenne ich auch schon aus
+rust und julia. Und in rust <code>const</code> Funktionen haben ähnliche Beschränkungen wie Haskell
+Funktionen. Ganz nützlich wurden auch meine kleinen Exkursionen in Uiua, weil diese Programme
+immer tacit sind. Dort &ldquo;fließen&rdquo; die Daten auch durch die Programmzeilen ohne an Variablen
+gebunden zu werden. Aber um so erstaunlicher ist es finde ich, dass mir die Rekursion keine
+Probleme gemacht hat.</p>
+<p>Ich finde es eine sehr interessantes Designentscheidung rekursion als so einen zentralen
+Bauteil der Sprache zu haben. Manchmal durchaus mental fordernd, aber auch nah an der
+Mathematik, aber dazu später mehr. Ein weiterer hübscher Nebeneffekt der Rekursion ist, dass
+Funktionen sehr kompakt werden können. Das wird noch weiter bestärkt durch &ldquo;point-free&rdquo; notation,
+die zwar nicht pflicht ist aber mir intuitiv vorkommt und auch einfacher, denn die Variablen wären
+ohnehin nicht veränderbar.</p>
+<h2 id="mathematische-notation">mathematische Notation</h2>
+<p>Zufällig bin ich auch aktuell in der ersten Woche meiner mathe Vorlesungen an der Uni und wir
+klären Grundlagen von Mengenlehre, Aussagenlogik und mathematische Schreibweisen. Mir sind immer
+wieder Ähnlichkeiten in der Notation aufgefallen. Zum Beispiel bei der Definition von Mengen
+und einer list comprehension und der Definition einer Menge.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Haskell" data-lang="Haskell"><span class="line"><span class="ln">1</span><span class="cl"><span class="p">[</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="o">|</span> <span class="n">x</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">]</span> <span class="p">]</span></span></span></code></pre></div><p>Oder auch die Schreibweise einer Fallunterscheidung und dem Patternmatching:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Haskell" data-lang="Haskell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nf">betrag</span> <span class="n">x</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="o">|</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span>    <span class="ow">=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span>     <span class="ow">=</span> <span class="o">-</span><span class="n">x</span></span></span></code></pre></div><p>Und auch in der Notation und Herangehensweise zu Induktionsbeweisen:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Haskell" data-lang="Haskell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nf">factorial</span> <span class="mi">0</span> <span class="ow">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nf">factorial</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factorial</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span></span></span></code></pre></div><p>Es wird ein Grundfall und ein Fall definiert, der darauf aufbaut. Außerdem wird immer rekursiv argumentiert.
+Nur das der Beweis (zumindest die die ich zu sehen bekommen habe) meist in die Unendlichkeit verläuft und damit
+wahr ist und Funktionen in Haskell sich &ldquo;nach unten&rdquo; selbst aufrufen und so (im Idealfall) terminieren.</p>
+<h2 id="fazit">Fazit</h2>
+<p>Haskell ist ohne Frage eine sehr interessante Sprache die ich weiter lernen und verwenden werde.
+Es mag zwar nicht so performant sein wie rust,</p>
+<blockquote>
+<p>Haskell ist nur Rust mit <code>.clone()</code> überall</p>
+</blockquote>
+<p>aber es erlaubt einem sich mehr auf die Logik zu konzentrieren und kompakteren code zu schreiben.
+Mann muss sich nicht um lifetimes Gedanken machen und type generics sind deutlich einfacher und
+mit weniger Boilerplate verbunden als in rust, was code reusal wiederum einfacher macht.</p>
+
+</content>
+<p>
+  
+</p>
+
+
+  <p>
+    <a href='mailto:blog@lovirent.eu?subject=Antwort%20auf%20"erste%20Woche%20Haskell"'>
+      Diesen Beitrag per Email kommentieren  ↪
+    </a>
+  </p>
+
+
+
+  </main>
+  <footer><small>
+  Lovis Rentsch (CC BY-SA 4.0) | gebaut mit <a href="https://gohugo.io">hugo</a> und <a href="https://github.com/clente/hugo-bearcub">Bear Cub</a>
+</small></footer>
+
+    
+</body>
+
+</html>

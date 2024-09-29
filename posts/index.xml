@@ -9,8 +9,115 @@
     <managingEditor>blog@lovirent.eu (Lovis Rentsch)</managingEditor>
     <webMaster>blog@lovirent.eu (Lovis Rentsch)</webMaster>
     <copyright>Lovis Rentsch (CC BY-SA 4.0)</copyright>
-    <lastBuildDate>Fri, 30 Aug 2024 23:33:05 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 24 Sep 2024 10:05:34 +0200</lastBuildDate>
     <atom:link href="https://blog.lovirent.eu/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>erste Woche Haskell</title>
+      <link>https://blog.lovirent.eu/posts/first-haskell/</link>
+      <pubDate>Tue, 24 Sep 2024 10:05:34 +0200</pubDate><author>blog@lovirent.eu (Lovis Rentsch)</author>
+      <guid>https://blog.lovirent.eu/posts/first-haskell/</guid>
+      <description>Ach ja, Haskell. Es stand schon länger auf meiner Todo-Liste Haskell zu lernen. Es übt eine besondere Faszination aus als Programmiersprache die so anders funktioniert. Auch als possionierter OOP Hater, ohne jemals wirklich OOP Code geschrieben zu haben musste ich irgendwann auch mal bei Haskell landen.&#xA;Hier will ich also meine Erfahrungen nach so rund einer Woche festhalten. Also, das kann auch alles falsch sein was ich hier schreibe.&#xA;funktionelle Programmierung Was mich, wie ich schon ansprach, besonders reitzt ist der funktionelle Aspekt der Sprache.</description>
+      <content:encoded><![CDATA[<p>Ach ja, Haskell. Es stand schon länger auf meiner Todo-Liste Haskell zu lernen. Es
+übt eine besondere Faszination aus als Programmiersprache die so anders funktioniert.
+Auch als possionierter OOP Hater, ohne jemals wirklich OOP Code geschrieben zu haben
+musste ich irgendwann auch mal bei Haskell landen.</p>
+<p>Hier will ich also meine Erfahrungen nach so rund einer Woche festhalten. Also,
+das kann auch alles falsch sein was ich hier schreibe.</p>
+<h2 id="funktionelle-programmierung">funktionelle Programmierung</h2>
+<p>Was mich, wie ich schon ansprach, besonders reitzt ist der funktionelle Aspekt der Sprache.
+Aber ich hatte deutlich weniger Probleme mit Rekursion als ich erwartet habe. Ich habe
+noch nicht durchschaut wie <code>fold</code> effektiv zu verwenden ist. Die anderen Seiten der
+Sprache, bis auf die Syntax, waren mir schon recht bekannt. Vorallem das Typeclass
+system ähnelt dem rust Trait System sehr. Das liegt wohl daran, dass Rust es sich von
+Haskell abgeschaut. Das Funktionen &ldquo;first-class-citizens&rdquo; sind kenne ich auch schon aus
+rust und julia. Und in rust <code>const</code> Funktionen haben ähnliche Beschränkungen wie Haskell
+Funktionen. Ganz nützlich wurden auch meine kleinen Exkursionen in Uiua, weil diese Programme
+immer tacit sind. Dort &ldquo;fließen&rdquo; die Daten auch durch die Programmzeilen ohne an Variablen
+gebunden zu werden. Aber um so erstaunlicher ist es finde ich, dass mir die Rekursion keine
+Probleme gemacht hat.</p>
+<p>Ich finde es eine sehr interessantes Designentscheidung rekursion als so einen zentralen
+Bauteil der Sprache zu haben. Manchmal durchaus mental fordernd, aber auch nah an der
+Mathematik, aber dazu später mehr. Ein weiterer hübscher Nebeneffekt der Rekursion ist, dass
+Funktionen sehr kompakt werden können. Das wird noch weiter bestärkt durch &ldquo;point-free&rdquo; notation,
+die zwar nicht pflicht ist aber mir intuitiv vorkommt und auch einfacher, denn die Variablen wären
+ohnehin nicht veränderbar.</p>
+<h2 id="mathematische-notation">mathematische Notation</h2>
+<p>Zufällig bin ich auch aktuell in der ersten Woche meiner mathe Vorlesungen an der Uni und wir
+klären Grundlagen von Mengenlehre, Aussagenlogik und mathematische Schreibweisen. Mir sind immer
+wieder Ähnlichkeiten in der Notation aufgefallen. Zum Beispiel bei der Definition von Mengen
+und einer list comprehension und der Definition einer Menge.</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Haskell" data-lang="Haskell"><span class="line"><span class="ln">1</span><span class="cl"><span class="p">[</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="o">|</span> <span class="n">x</span> <span class="ow">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="p">]</span> <span class="p">]</span></span></span></code></pre></div><p>Oder auch die Schreibweise einer Fallunterscheidung und dem Patternmatching:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Haskell" data-lang="Haskell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nf">betrag</span> <span class="n">x</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="o">|</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span>    <span class="ow">=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span>     <span class="ow">=</span> <span class="o">-</span><span class="n">x</span></span></span></code></pre></div><p>Und auch in der Notation und Herangehensweise zu Induktionsbeweisen:</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Haskell" data-lang="Haskell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nf">factorial</span> <span class="mi">0</span> <span class="ow">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nf">factorial</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">factorial</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span></span></span></code></pre></div><p>Es wird ein Grundfall und ein Fall definiert, der darauf aufbaut. Außerdem wird immer rekursiv argumentiert.
+Nur das der Beweis (zumindest die die ich zu sehen bekommen habe) meist in die Unendlichkeit verläuft und damit
+wahr ist und Funktionen in Haskell sich &ldquo;nach unten&rdquo; selbst aufrufen und so (im Idealfall) terminieren.</p>
+<h2 id="fazit">Fazit</h2>
+<p>Haskell ist ohne Frage eine sehr interessante Sprache die ich weiter lernen und verwenden werde.
+Es mag zwar nicht so performant sein wie rust,</p>
+<blockquote>
+<p>Haskell ist nur Rust mit <code>.clone()</code> überall</p>
+</blockquote>
+<p>aber es erlaubt einem sich mehr auf die Logik zu konzentrieren und kompakteren code zu schreiben.
+Mann muss sich nicht um lifetimes Gedanken machen und type generics sind deutlich einfacher und
+mit weniger Boilerplate verbunden als in rust, was code reusal wiederum einfacher macht.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>android safe mode</title>
+      <link>https://blog.lovirent.eu/posts/safe_mode/</link>
+      <pubDate>Mon, 23 Sep 2024 17:16:21 +0200</pubDate><author>blog@lovirent.eu (Lovis Rentsch)</author>
+      <guid>https://blog.lovirent.eu/posts/safe_mode/</guid>
+      <description>Dieser Post wird nicht wirklich vielen weiterhelfen, aber ich schreibe ihn trotzdem mal. Außerdem kann man ein bisschen über freie Software und ihre Rolle in modernen Systemen nachdenken.&#xA;Meine Ausgangslage war die, dass ich nicht die Vorinstallierte Samsung Tastatur benutzen wollte, weil ich ihr nicht vertraue. Ich mag paranoid klingen aber die können da sonst was installiert haben und ich habe keinerlei Möglichkeit es zu überprüfen (unter anderem mangels der Peripherie, was mich sowieso an der Nutzung des Handys stört).</description>
+      <content:encoded><![CDATA[<p>Dieser Post wird nicht wirklich vielen weiterhelfen, aber ich schreibe ihn trotzdem mal. Außerdem kann man ein bisschen über freie
+Software und ihre Rolle in modernen Systemen nachdenken.</p>
+<p>Meine Ausgangslage war die, dass ich nicht die Vorinstallierte Samsung Tastatur benutzen wollte, weil ich ihr nicht vertraue. Ich
+mag paranoid klingen aber die können da sonst was installiert haben und ich habe keinerlei Möglichkeit es zu überprüfen (unter
+anderem mangels der Peripherie, was mich sowieso an der Nutzung des Handys stört). Und die Tastatur ist einer der sensibelsten
+Informationsquellen auf meinem Gerät. Über die Tastatur geht das Masterpasswort meines Passwortmanagers, alle meine Textnachrichten,
+meine Suchanfragen, meine Notizen, und ,und ,und. Wenn ich irgendwo ein bisschen paranoid sein sollte, dann da. Noch dazu wenn es
+keine nennenswerten Einschränkungen imm Kompfort zur Folge hat. Um zum Punkt zu kommen, ich habe eine Quelloffene Tastatur
+installiert und als Standart gesetzt. Es war <a href="https://github.com/FossifyOrg/Keyboard">Fossify Keyboard</a>, aber das spielt hier
+nicht wirklich eine Rolle. Ich war sehr zufrieden damit, es war einfach eine Tastatur und die hatte auch noch mehr Optionen als
+die normale.</p>
+<p>Das Problem ergab sich dann als ich mein Gerät neu gestartet habe. Nichts böses ahnend habe ich es neu gestartet und wollte es
+entsperren. Das ging aber nicht, weil die Tastatur einfach wieder verschwunden ist. Ich war für einen Moment echt aufgeschmissen
+weil alle Wege die kannte, die nicht eine externe Tastatur gebraucht hätten nicht gehen wenn das Gerät noch verschlüsselt ist; nach
+einem Neustart ist es verschlüsselt bis es einmal entsperrt wurde. Also kein adb, kein garnix. Nach einigen schnellen Suchanfragen
+habe ich herausgefunden dass Android den &ldquo;Safe Mode&rdquo; hat in dem 3rd party Applikationen ausgeschaltet werden. Und das hat mir dann
+den Tag gerattet, denn ich konnte die Einstellungen bezüglich der Tastatur auf die Standarts zurücksetzten und alles war wieder gut.</p>
+<p>Also, wenn jemand unter den werten Lesenden jemals ein Problem dieser Natur haben sollte dann wisst ihr jetzt was zu tun ist. Wenn
+man auf den &ldquo;Aus Knopf&rdquo; bis die Option zum Herunterfahren erscheint. Dann &ldquo;Herunterfahren&rdquo; gedrückt halten bis in den &ldquo;Safe Mode&rdquo;
+gebootet wird.</p>
+<p>Jetzt noch ein bisschen freies Philosophieren über freie Software zum Abschluss. Das Problem mit der Enschlüsselung wurde
+auch <a href="https://github.com/FossifyOrg/Keyboard/issues/59">prompt behoben</a>. Wenn man nun mal einen Schritt zurück macht und betrachtet
+war wir vor uns haben. Wir haben ein Programm welches besser oder zumindest genau so gut funktioniert wie die komerzielle
+Variante, aber es wird von freiwilligen Entwicklern ohne Gegenlohn entwickelt und uns zur Verfügung gestellt. Ich bin also selber
+Schuld. Aber das ist auch eine Image Frage, &ldquo;freie Software ist einfach schlechter, sie ist unzuverlässig und schafft Probleme&rdquo;. Ich
+hoffe ich mache es hiermit nicht noch schlimmer, denn ich liebe freie Software. Das Problem ist nicht der Entwickler des Projekts, es
+sind wir und ebendieses Vorurteil. Meiner Meinung nach geht es um Wertschätzung und Vergütung von freier Software. Alles baut auf
+diese Projekte auf. Sie sind die zuverlässigsten die wir haben, aber die komerziellen Produkte bauen darauf auf und haben bessere
+testing Instanzen die dann so etwas zum Beispiel verhindern.</p>
+<p>Das ist jetzt nicht wirklich ein rundes Ende aber mein Punkt steht, doof gelaufen aber das Problem ist nicht die freie Software.</p>
+]]></content:encoded>
+    </item>
     <item>
       <title>erster Eintrag</title>
       <link>https://blog.lovirent.eu/posts/first-post/</link>
