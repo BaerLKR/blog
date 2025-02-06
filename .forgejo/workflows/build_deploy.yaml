@@ -6,6 +6,8 @@ jobs:
       - run: |
           git config --global http.sslVerify false
           git clone https://git.lovirent.eu/pacman/blog
+          cd blog
+          git submodule update --init --recursive
       - run: |
           cd blog
           nix build --extra-experimental-features nix-command --extra-experimental-features flakes
