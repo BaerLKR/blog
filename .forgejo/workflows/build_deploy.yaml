@@ -1,0 +1,18 @@
+on: [push]
+jobs:
+  build:
+    runs-on: host
+    steps:
+      - run: |
+          git config --global http.sslVerify false
+          git clone https://git.lovirent.eu/pacman/blog
+      - run: |
+          cd blog
+          nix build --extra-experimental-features nix-command --extra-experimental-features flakes
+      - run: |
+          mkdir public
+          cp -r blog/result/* public
+      - run: |
+          chmod +w -R /var/lib/runner/blog
+          rm -rf /var/lib/runner/blog/*
+          cp -r public/ /var/lib/runner/blog
