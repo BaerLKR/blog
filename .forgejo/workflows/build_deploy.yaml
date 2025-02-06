@@ -8,9 +8,11 @@ jobs:
           git clone https://git.lovirent.eu/pacman/blog
           cd blog
           git submodule update --init --recursive
+          ls -la
+          ls -la themes
       - run: |
           cd blog
-          nix build --extra-experimental-features nix-command --extra-experimental-features flakes
+          nix build '.?submodules=1'
       - run: |
           mkdir public
           cp -r blog/result/* public
