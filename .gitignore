@@ -1,3 +1,5 @@
-.direnv/
-result/
-resources/_gen/
+*.beam
+*.ez
+/build
+/dist
+erl_crash.dump

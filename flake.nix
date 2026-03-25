@@ -1,33 +1,34 @@
 {
+  description = "my blog";
   inputs = {
-    utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nix-gleam.url = "git+https://gitlab.olaf.one/pacman/nix-gleam.git";
   };
   outputs = {
-    self,
     nixpkgs,
-    utils,
-  }:
-    utils.lib.eachDefaultSystem (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in {
-        packages.default = pkgs.stdenvNoCC.mkDerivation rec {
-          src = ./.;
-          pname = "lovis_blog";
-          version = "0.1.0";
-          buildPhase = with pkgs; ''
-            ${hugo}/bin/hugo
-          '';
-          installPhase = with pkgs; ''
-            mkdir -p $out
-            cp -r public/* $out
-          '';
-        };
-        devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            hugo
-          ];
-        };
-      }
-    );
+    nix-gleam,
+    ...
+  }: let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+      overlays = [
+        nix-gleam.overlays.default
+      ];
+    };
+  in {
+    devShells.${system}.default = pkgs.mkShell {
+      name = "gleam";
+      buildInputs = with pkgs; [
+        erlang
+        gleam
+        inotify-tools
+        rebar3
+      ];
+    };
+    packages.${system}.default = pkgs.buildGleamApplication {
+      src = ./.;
+    };
+  };
 }

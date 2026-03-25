@@ -1,54 +1,40 @@
 {
   "nodes": {
-    "nixpkgs": {
+    "nix-gleam": {
       "locked": {
-        "lastModified": 0,
-        "narHash": "sha256-2ShmEaFi0kJVOEEu5gmlykN5dwjWYWYUJmlRTvZQRpU=",
-        "path": "/nix/store/d6533m6b80n3c9lia5kvaz59ad3fynwk-source",
-        "type": "path"
+        "lastModified": 1755183815,
+        "narHash": "sha256-s7/R8N6fmQvIskvVl1x6hZaVw+/PZOM2A2p+v8qTz+s=",
+        "ref": "refs/heads/main",
+        "rev": "761410a72cb73734b56f5d30009fca13ea3a56bc",
+        "revCount": 12,
+        "type": "git",
+        "url": "https://gitlab.olaf.one/pacman/nix-gleam.git"
       },
       "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
+        "type": "git",
+        "url": "https://gitlab.olaf.one/pacman/nix-gleam.git"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1774106199,
+        "narHash": "sha256-US5Tda2sKmjrg2lNHQL3jRQ6p96cgfWh3J1QBliQ8Ws=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs",
-        "utils": "utils"
-      }
-    },
-    "systems": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
-    "utils": {
-      "inputs": {
-        "systems": "systems"
-      },
-      "locked": {
-        "lastModified": 1710146030,
-        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
+        "nix-gleam": "nix-gleam",
+        "nixpkgs": "nixpkgs"
       }
     }
   },
