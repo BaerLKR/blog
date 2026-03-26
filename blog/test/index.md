@@ -23,3 +23,9 @@ Blogatto is a framework for building static blogs with Lustre and Markdown. You 
 ## Next steps
 
 Check out the [getting started guide](/blog/getting-started) to learn more about setting up your own blog!
+
+```rust
+pub fn main() {
+    println!("uwu");
+}
+```
