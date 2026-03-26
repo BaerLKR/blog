@@ -2,8 +2,13 @@ import blogatto
 import blogatto/config
 import blogatto/config/feed
 import blogatto/config/markdown
+import gleam/dict
+import gleam/order
+import gleam/result
+import gleam/string
 
 // import blogatto/config/markdown/code
+import blogatto/config/markdown/code
 import blogatto/config/robots
 import blogatto/config/sitemap
 import blogatto/error
@@ -25,6 +30,7 @@ pub fn config() {
   |> config.static_dir("./static")
   |> config.markdown(md())
   |> config.route("/", home_view)
+  |> config.route("/archive", archive)
   |> config.feed(rss())
   |> config.sitemap(sitemap.new("/sitemap.xml"))
   |> config.robots(
@@ -44,23 +50,28 @@ pub fn rss() {
   |> feed.generator("Blogatto")
 }
 
+fn head(descr: String, title: String) -> Element(Nil) {
+  html.head([], [
+    html.meta([attribute.charset("UTF-8")]),
+    html.link([attribute.rel("stylesheet"), attribute.href("/style.css")]),
+    html.link([attribute.rel("icon"), attribute.href("/favicon.ico")]),
+    html.meta([
+      attribute.name("viewport"),
+      attribute.content("width=device-width, initial-scale=1"),
+    ]),
+    html.title([], title),
+    html.meta([
+      attribute.name("description"),
+      attribute.content(descr),
+    ]),
+  ])
+}
+
 fn blog_post_template(p: Post(Nil), _all_posts: List(Post(Nil))) -> Element(Nil) {
   let lang = option.unwrap(p.language, "en")
 
   html.html([attribute.lang(lang)], [
-    html.head([], [
-      html.meta([attribute.charset("UTF-8")]),
-      html.link([attribute.rel("stylesheet"), attribute.href("/style.css")]),
-      html.meta([
-        attribute.name("viewport"),
-        attribute.content("width=device-width, initial-scale=1"),
-      ]),
-      html.title([], p.title),
-      html.meta([
-        attribute.name("description"),
-        attribute.content(p.description),
-      ]),
-    ]),
+    head(p.title, p.description),
     html.body([], [
       html.header([], [
         html.nav([], [
@@ -87,15 +98,15 @@ fn blog_post_template(p: Post(Nil), _all_posts: List(Post(Nil))) -> Element(Nil)
 }
 
 pub fn md() {
-  // let syntax_config =
-  //   code.default()
-  //   |> code.smalto_config(themes.material_light())
+  let syntax_config =
+    code.default()
+    |> code.smalto_config(themes.dracula())
 
   markdown.default()
   |> markdown.markdown_path("./blog")
   |> markdown.route_prefix("blog")
   |> markdown.template(blog_post_template)
-  // |> markdown.syntax_highlighting(syntax_config)
+  |> markdown.syntax_highlighting(syntax_config)
   |> markdown.pre(fn(children) {
     html.pre([attribute.class("code-block")], children)
   })
@@ -106,12 +117,6 @@ pub fn md() {
     }
     html.code([attribute.class(lang_class)], children)
   })
-  // markdown.default()
-  // |> markdown.markdown_path("./blog")
-  // |> markdown.route_prefix("blog")
-  // |> markdown.h1(fn(id, children) {
-  //   html.h1([attribute.id(id), attribute.class("post-title")], children)
-  // })
 }
 
 pub fn main() {
@@ -122,25 +127,63 @@ pub fn main() {
 }
 
 fn home_view(posts: List(Post(Nil))) -> Element(Nil) {
-  let sorted = list.sort(posts, fn(a, b) { timestamp.compare(b.date, a.date) })
+  let sorted =
+    list.sort(posts, fn(a, b) { timestamp.compare(b.date, a.date) })
+    |> list.filter(fn(p) { post_is_in_archive(p) })
 
   html.html([], [
-    html.head([], [
-      html.title([], "My Blog"),
-      html.link([attribute.rel("stylesheet"), attribute.href("/style.css")]),
-    ]),
+    head("Lovis' Blog", "my thoughts, startpage"),
     html.body([], [
-      html.h1([], [element.text("My Blog")]),
-      html.ul(
-        [],
-        list.map(sorted, fn(p) {
-          html.li([], [
-            html.a([attribute.href("/blog/" <> p.slug)], [
-              element.text(p.title),
-            ]),
-          ])
-        }),
-      ),
+      html.main([], [
+        html.h1([], [element.text("Lovis' Blog")]),
+        html.ul(
+          [],
+          list.map(sorted, fn(p) {
+            html.li([], [
+              html.a([attribute.href("/blog/" <> p.slug)], [
+                element.text(p.title),
+              ]),
+            ])
+          }),
+        ),
+        html.a([attribute.href("/archive")], [html.text("archive")]),
+      ]),
+    ]),
+  ])
+}
+
+fn post_is_in_archive(p: Post(Nil)) -> Bool {
+  case p.extras |> dict.get("archive") {
+    Ok(val) ->
+      case string.compare(val, "true") {
+        order.Eq -> False
+        _ -> True
+      }
+    Error(_) -> True
+  }
+}
+
+fn archive(posts: List(Post(Nil))) -> Element(Nil) {
+  let sorted =
+    list.sort(posts, fn(a, b) { timestamp.compare(b.date, a.date) })
+    |> list.filter(fn(p) { !post_is_in_archive(p) })
+
+  html.html([], [
+    head("Lovis' Blog", "my thoughts, startpage"),
+    html.body([], [
+      html.main([], [
+        html.h1([], [element.text("Lovis' Blog")]),
+        html.ul(
+          [],
+          list.map(sorted, fn(p) {
+            html.li([], [
+              html.a([attribute.href("/blog/" <> p.slug)], [
+                element.text(p.title),
+              ]),
+            ])
+          }),
+        ),
+      ]),
     ]),
   ])
 }

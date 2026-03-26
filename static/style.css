@@ -1,2 +1,43 @@
 @import "https://unpkg.com/open-props";
 @import "https://unpkg.com/open-props/normalize.min.css";
+@import "open-props/palette";
+
+:root {
+  --palette-hue: 130;
+  --palette-hue-rotate-by: 5;
+  --palette-chroma: 0.9;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--color-5);
+}
+
+.code-block {
+  background-color: var(--color-15);
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: solid var(--color-9) 2px;
+}
+
+html {
+  background-color: var(--color-14);
+  color: var(--color-1);
+}
+
+a {
+  color: var(--color-8);
+  &:hover {
+    color: var(--color-6);
+    text-decoration-color: var(--color-6);
+  }
+}
+
+main {
+  --width: clamp(40rem, 60vw, 100rem);
+  max-width: var(--width);
+  min-height: 100vh;
+  margin-left: calc((100vw - var(--width)) / 2);
+  padding: 3rem;
+}

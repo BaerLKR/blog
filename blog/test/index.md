@@ -4,6 +4,7 @@ date: 2025-01-15 00:00:00
 description: Welcome to my new blog built with Blogatto
 slug: yooo
 tags: test, example
+archive: true
 ---
 
 # Hello World
