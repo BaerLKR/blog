@@ -4,6 +4,7 @@ date: 2026-02-08 17:16:01
 description: my thoughts on erlang
 slug: erlang
 title-image: /blog/erlang/title.svg
+tags: erlang, programming
 ---
 
 I am, by no means, an expert on erlang. To be honest I don't fully grasp the basic concepts yet. But I am fascinated by the ideas that 

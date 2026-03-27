@@ -1,6 +1,4 @@
 import blogatto
-import partials.{nav, head, post_card}
-import lib.{post_is_in_archive, get_title_img}
 import blogatto/config
 import blogatto/config/feed
 import blogatto/config/markdown
@@ -13,12 +11,13 @@ import gleam/io
 import gleam/list
 import gleam/option
 import gleam/time/timestamp
+import lib.{get_title_img, post_is_not_archived}
 import lustre/attribute
 import lustre/element.{type Element}
 import lustre/element/html
+import partials.{head, nav, post_card}
 import smalto/lustre/themes
-
-// TODO: Tags
+import tag
 
 const site_url = "https://blog.lovirent.eu"
 
@@ -29,6 +28,11 @@ pub fn config() {
   |> config.markdown(md())
   |> config.route("/", home_view)
   |> config.route("/archive", archive)
+  |> config.route("/tag/git", tag.tag("git"))
+  |> config.route("/tag/nix", tag.tag("nix"))
+  |> config.route("/tag/haskell", tag.tag("haskell"))
+  |> config.route("/tag/programming", tag.tag("programming"))
+  |> config.route("/tag/erlang", tag.tag("erlang"))
   |> config.feed(rss())
   |> config.sitemap(sitemap.new("/sitemap.xml"))
   |> config.robots(
@@ -69,7 +73,7 @@ fn blog_post_template(p: Post(Nil), _all_posts: List(Post(Nil))) -> Element(Nil)
           html.div([], p.contents),
         ]),
       ]),
-      nav(),
+      nav(option.Some(lib.get_tags(p))),
     ]),
   ])
 }
@@ -106,7 +110,7 @@ pub fn main() {
 fn home_view(posts: List(Post(Nil))) -> Element(Nil) {
   let sorted =
     list.sort(posts, fn(a, b) { timestamp.compare(b.date, a.date) })
-    |> list.filter(fn(p) { post_is_in_archive(p) })
+    |> list.filter(fn(p) { post_is_not_archived(p) })
 
   html.html([], [
     head("Lovis' Blog", "my thoughts, startpage"),
@@ -131,7 +135,7 @@ fn home_view(posts: List(Post(Nil))) -> Element(Nil) {
           }),
         ),
       ]),
-      nav(),
+      nav(option.None),
     ]),
   ])
 }
@@ -139,7 +143,7 @@ fn home_view(posts: List(Post(Nil))) -> Element(Nil) {
 fn archive(posts: List(Post(Nil))) -> Element(Nil) {
   let sorted =
     list.sort(posts, fn(a, b) { timestamp.compare(b.date, a.date) })
-    |> list.filter(fn(p) { !post_is_in_archive(p) })
+    |> list.filter(fn(p) { !post_is_not_archived(p) })
 
   html.html([], [
     head("Lovis' Blog Archive", "my thoughts, startpage"),
@@ -158,7 +162,7 @@ fn archive(posts: List(Post(Nil))) -> Element(Nil) {
           }),
         ),
       ]),
-      nav(),
+      nav(option.None),
     ]),
   ])
 }

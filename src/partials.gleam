@@ -1,14 +1,15 @@
-import lustre/attribute
-import gleam/dict
-import gleam/result
-import lustre/element/html
 import blogatto/post.{type Post}
+import gleam/dict
+import gleam/list
+import gleam/option
+import gleam/result
 import gleam/string
 import gleam/time/calendar
 import gleam/time/timestamp
 import lib.{get_title_img}
+import lustre/attribute
 import lustre/element.{type Element}
-
+import lustre/element/html
 
 pub fn head(descr: String, title: String) -> Element(Nil) {
   html.head([], [
@@ -27,7 +28,7 @@ pub fn head(descr: String, title: String) -> Element(Nil) {
   ])
 }
 
-pub fn nav() -> Element(Nil) {
+pub fn nav(tags: option.Option(List(String))) -> Element(Nil) {
   let tag_link = fn(name, path) {
     html.li([], [
       html.a([attribute.href("/tag/" <> name)], [
@@ -38,21 +39,8 @@ pub fn nav() -> Element(Nil) {
       ]),
     ])
   }
-  html.nav([], [
-    html.menu([], [
-      html.li([], [
-        html.a([attribute.href("/")], [
-          html.img([attribute.src("/home.svg"), attribute.class("nav-item")]),
-        ]),
-      ]),
-      html.li([], [
-        html.a([attribute.href("/archive")], [
-          html.img([
-            attribute.src("/archive_small.svg"),
-            attribute.class("nav-item"),
-          ]),
-        ]),
-      ]),
+  let tag_items = {
+    let all = [
       html.hr([
         attribute.style("width", "100%"),
         attribute.style("color", "var(--dark)"),
@@ -61,7 +49,40 @@ pub fn nav() -> Element(Nil) {
       tag_link("git", "/git.svg"),
       tag_link("nix", "/nix.svg"),
       tag_link("haskell", "/haskell.svg"),
-    ]),
+      tag_link("erlang", "/erlang.svg"),
+    ]
+    case tags {
+      option.Some(ts) ->
+        [
+          html.hr([
+            attribute.style("width", "100%"),
+            attribute.style("color", "var(--dark)"),
+          ]),
+        ]
+        |> list.append(list.map(ts, fn(t) { tag_link(t, "/" <> t <> ".svg") }))
+      option.None -> all
+    }
+  }
+  html.nav([], [
+    html.menu(
+      [],
+      [
+        html.li([], [
+          html.a([attribute.href("/")], [
+            html.img([attribute.src("/home.svg"), attribute.class("nav-item")]),
+          ]),
+        ]),
+        html.li([], [
+          html.a([attribute.href("/archive")], [
+            html.img([
+              attribute.src("/archive_small.svg"),
+              attribute.class("nav-item"),
+            ]),
+          ]),
+        ]),
+      ]
+        |> list.append(tag_items),
+    ),
   ])
 }
 
