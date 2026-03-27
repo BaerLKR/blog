@@ -1,43 +1,84 @@
-@import "https://unpkg.com/open-props";
-@import "https://unpkg.com/open-props/normalize.min.css";
-@import "open-props/palette";
-
 :root {
-  --palette-hue: 130;
-  --palette-hue-rotate-by: 5;
-  --palette-chroma: 0.9;
+  --base: #0b2431;
+  --dark: #050f15;
+  --light: #dae479;
+  --color: #ebfef5;
+  --color-dark: #5a5b5b;
+  --grid-cols: 12;
+  --grid-gap: 1.5rem;
+  --container-max: 1280px;
+  --container-pad: 1rem;
 }
-
-h1,
-h2,
-h3 {
-  color: var(--color-5);
-}
-
-.code-block {
-  background-color: var(--color-15);
-  padding: 0.5rem;
-  margin: 0.5rem;
-  border: solid var(--color-9) 2px;
-}
-
 html {
-  background-color: var(--color-14);
-  color: var(--color-1);
+  background-color: var(--base);
+  color: var(--color);
+  box-size: border-box;
 }
-
+main {
+  --max-w: 80ch;
+  max-width: var(--max-w);
+  /* width: clamp(calc(100vw - 0.1em), 75%, var(--max-w)); */
+  margin: 0 clamp(1em, 5%, calc(100vw - var(--max-w) / 2));
+}
+pre {
+  background-color: var(--dark);
+  padding: 1rem;
+  border: solid 2px var(--light);
+}
 a {
-  color: var(--color-8);
+  color: var(--light);
+}
+.title-image,
+.preview-image {
+  width: 50%;
+  position: relative;
+}
+.title-image {
+  height: 25%;
+}
+.post-card {
+  border: solid var(--color-dark) 0.5px;
+  display: flex;
+  padding: 1.5rem;
+  margin: 1rem;
+  min-height: 10rem;
+  min-width: 10rem;
+  flex-direction: column;
+  width: fit-content;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 0.5em;
+  position: relative;
+  transition: border 0.5s ease;
   &:hover {
-    color: var(--color-6);
-    text-decoration-color: var(--color-6);
+    border: solid var(--color) 0.5px;
+    cursor: pointer;
   }
 }
-
-main {
-  --width: clamp(40rem, 60vw, 100rem);
-  max-width: var(--width);
-  min-height: 100vh;
-  margin-left: calc((100vw - var(--width)) / 2);
-  padding: 3rem;
+.post-list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
+.timestamp {
+  color: var(--color-dark);
+  text-decoration: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0.2em;
+}
+menu {
+  list-style: none;
+  display: flex;
+  gap: 1em;
+}
+
+/* Image at the top */
+/* maybe somethign with nav elements hand drwn */
+/* titles hand written */
+/* sticky titles */
+/* footer with license and hand drawn images */
+/* colors should match */
+/* archive art */

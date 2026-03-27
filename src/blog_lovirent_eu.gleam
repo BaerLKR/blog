@@ -2,20 +2,19 @@ import blogatto
 import blogatto/config
 import blogatto/config/feed
 import blogatto/config/markdown
-import gleam/dict
-import gleam/order
-import gleam/result
-import gleam/string
-
-// import blogatto/config/markdown/code
 import blogatto/config/markdown/code
 import blogatto/config/robots
 import blogatto/config/sitemap
 import blogatto/error
 import blogatto/post.{type Post}
+import gleam/dict
 import gleam/io
 import gleam/list
 import gleam/option
+import gleam/order
+import gleam/result
+import gleam/string
+import gleam/time/calendar
 import gleam/time/timestamp
 import lustre/attribute
 import lustre/element.{type Element}
@@ -85,14 +84,6 @@ fn blog_post_template(p: Post(Nil), _all_posts: List(Post(Nil))) -> Element(Nil)
           html.div([], p.contents),
         ]),
       ]),
-      html.footer([], [
-        html.p([], [
-          element.text("Built with "),
-          html.a([attribute.href("https://github.com/veeso/blogatto")], [
-            element.text("Blogatto"),
-          ]),
-        ]),
-      ]),
     ]),
   ])
 }
@@ -134,8 +125,14 @@ fn home_view(posts: List(Post(Nil))) -> Element(Nil) {
   html.html([], [
     head("Lovis' Blog", "my thoughts, startpage"),
     html.body([], [
-      html.main([], [
-        html.h1([], [element.text("Lovis' Blog")]),
+      html.hr([]),
+      html.main([attribute.class("container")], [
+        html.div([attribute.class("row")], [
+          html.h3([attribute.class("offset-4 col-2")], [
+            html.text("Lovis' Blog"),
+          ]),
+        ]),
+        html.div([attribute.class("row")], []),
         html.ul(
           [],
           list.map(sorted, fn(p) {
@@ -146,7 +143,16 @@ fn home_view(posts: List(Post(Nil))) -> Element(Nil) {
             ])
           }),
         ),
-        html.a([attribute.href("/archive")], [html.text("archive")]),
+        html.ul([attribute.style("list-style", "none")], [
+          html.li([], [
+            html.a(
+              [attribute.href("/archive"), attribute.class("archive-card")],
+              [
+                html.text("archive"),
+              ],
+            ),
+          ]),
+        ]),
       ]),
     ]),
   ])
@@ -163,24 +169,63 @@ fn post_is_in_archive(p: Post(Nil)) -> Bool {
   }
 }
 
+fn post_card(post: Post(Nil)) -> Element(Nil) {
+  let title_image: String =
+    post.extras |> dict.get("title-image") |> result.unwrap("/:3.png")
+  let image: String =
+    post.extras |> dict.get("image") |> result.unwrap("/favicon.ico")
+  html.li([], [
+    html.a(
+      [
+        attribute.href("/blog/" <> post.slug),
+        attribute.style("text-decoration", "none"),
+      ],
+      [
+        html.div([attribute.class("post-card")], [
+          html.img([attribute.src(title_image), attribute.class("title-image")]),
+          html.img([attribute.src(image), attribute.class("preview-image")]),
+          html.span([attribute.class("timestamp")], [
+            html.text(
+              post.date
+              |> timestamp.to_rfc3339(calendar.utc_offset)
+              |> string.drop_end(10),
+            ),
+          ]),
+        ]),
+      ],
+    ),
+  ])
+}
+
+fn nav() -> Element(Nil) {
+  html.nav([], [
+    html.menu([], [
+      html.li([], [html.text("ee")]),
+      html.li([], [html.text("ee")]),
+    ]),
+  ])
+}
+
 fn archive(posts: List(Post(Nil))) -> Element(Nil) {
   let sorted =
     list.sort(posts, fn(a, b) { timestamp.compare(b.date, a.date) })
     |> list.filter(fn(p) { !post_is_in_archive(p) })
 
   html.html([], [
-    head("Lovis' Blog", "my thoughts, startpage"),
+    head("Lovis' Blog Archive", "my thoughts, startpage"),
     html.body([], [
+      nav(),
       html.main([], [
-        html.h1([], [element.text("Lovis' Blog")]),
+        html.h1([], [element.text("Lovis' Blog Archive")]),
         html.ul(
-          [],
+          [attribute.style("list-style", "none"), attribute.class("post-list")],
           list.map(sorted, fn(p) {
-            html.li([], [
-              html.a([attribute.href("/blog/" <> p.slug)], [
-                element.text(p.title),
-              ]),
-            ])
+            post_card(p)
+            // html.li([], [
+            // html.a([attribute.href("/blog/" <> p.slug)], [
+            // element.text(p.title),
+            // ]),
+            // ])
           }),
         ),
       ]),
