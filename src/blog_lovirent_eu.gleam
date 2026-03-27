@@ -83,7 +83,9 @@ fn blog_post_template(p: Post(Nil), _all_posts: List(Post(Nil))) -> Element(Nil)
           ]),
         ]),
         html.article([], [
-          html.p([], [html.em([], [element.text(p.description)])]),
+          html.p([attribute.style("text-align", "center")], [
+            html.em([], [element.text(p.description)]),
+          ]),
           html.div([], p.contents),
         ]),
       ]),
@@ -133,7 +135,7 @@ fn home_view(posts: List(Post(Nil))) -> Element(Nil) {
         html.div([attribute.class("row")], [
           html.img([
             attribute.src("/lovis_blog.svg"),
-            attribute.style("height", "5em"),
+            attribute.class("site-title"),
           ]),
         ]),
         html.div([attribute.class("row")], []),
@@ -155,8 +157,8 @@ fn home_view(posts: List(Post(Nil))) -> Element(Nil) {
 }
 
 fn footer() -> Element(Nil) {
-
-        }
+  todo
+}
 
 fn post_is_in_archive(p: Post(Nil)) -> Bool {
   case p.extras |> dict.get("archive") {
@@ -180,7 +182,7 @@ fn post_card(post: Post(Nil)) -> Element(Nil) {
       ],
       [
         html.div([attribute.class("post-card")], [
-          html.img([attribute.src(image), attribute.class("preview-image")]),
+          // html.img([attribute.src(image), attribute.class("preview-image")]),
           html.img([
             attribute.src(get_title_img(post)),
             attribute.class("title-image"),
@@ -199,6 +201,16 @@ fn post_card(post: Post(Nil)) -> Element(Nil) {
 }
 
 fn nav() -> Element(Nil) {
+  let tag_link = fn(name, path) {
+    html.li([], [
+      html.a([attribute.href("/tag/" <> name)], [
+        html.img([
+          attribute.src(path),
+          attribute.class("nav-item"),
+        ]),
+      ]),
+    ])
+  }
   html.nav([], [
     html.menu([], [
       html.li([], [
@@ -214,6 +226,14 @@ fn nav() -> Element(Nil) {
           ]),
         ]),
       ]),
+      html.hr([
+        attribute.style("width", "100%"),
+        attribute.style("color", "var(--dark)"),
+      ]),
+      tag_link("programming", "/programming.svg"),
+      tag_link("git", "/git.svg"),
+      tag_link("nix", "/nix.svg"),
+      tag_link("haskell", "/haskell.svg"),
     ]),
   ])
 }
@@ -231,10 +251,7 @@ fn archive(posts: List(Post(Nil))) -> Element(Nil) {
     head("Lovis' Blog Archive", "my thoughts, startpage"),
     html.body([], [
       html.main([], [
-        html.img([
-          attribute.src("/archive.svg"),
-          attribute.style("height", "5em"),
-        ]),
+        html.img([attribute.src("/archive.svg"), attribute.class("site-title")]),
         html.ul(
           [attribute.style("list-style", "none"), attribute.class("post-list")],
           list.map(sorted, fn(p) {
