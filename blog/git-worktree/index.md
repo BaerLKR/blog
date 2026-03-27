@@ -3,8 +3,8 @@ title: git worktree
 date: 2024-12-11 19:14:47
 description: Git worktrees are a useful feature that I use often. But it is rarely talked about.
 slug: git-worktree
-title-image: /blog/git-worktree/git.png
-image: /blog/git-worktree/veloren.png
+title-image: /blog/git-worktree/git.svg
+# image: /blog/git-worktree/veloren.png
 archive: true
 ---
 

@@ -21,6 +21,8 @@ import lustre/element.{type Element}
 import lustre/element/html
 import smalto/lustre/themes
 
+// TODO: Tags
+
 const site_url = "https://blog.lovirent.eu"
 
 pub fn config() {
@@ -72,18 +74,20 @@ fn blog_post_template(p: Post(Nil), _all_posts: List(Post(Nil))) -> Element(Nil)
   html.html([attribute.lang(lang)], [
     head(p.title, p.description),
     html.body([], [
-      html.header([], [
-        html.nav([], [
-          html.a([attribute.href("/")], [element.text("← Home")]),
-        ]),
-      ]),
       html.main([], [
+        html.div([attribute.style("text-align", "center")], [
+          html.img([
+            attribute.src(get_title_img(p)),
+            attribute.style("height", "5em"),
+            attribute.style("padding", "1em"),
+          ]),
+        ]),
         html.article([], [
-          html.h1([], [element.text(p.title)]),
           html.p([], [html.em([], [element.text(p.description)])]),
           html.div([], p.contents),
         ]),
       ]),
+      nav(),
     ]),
   ])
 }
@@ -125,38 +129,34 @@ fn home_view(posts: List(Post(Nil))) -> Element(Nil) {
   html.html([], [
     head("Lovis' Blog", "my thoughts, startpage"),
     html.body([], [
-      html.hr([]),
       html.main([attribute.class("container")], [
         html.div([attribute.class("row")], [
-          html.h3([attribute.class("offset-4 col-2")], [
-            html.text("Lovis' Blog"),
+          html.img([
+            attribute.src("/lovis_blog.svg"),
+            attribute.style("height", "5em"),
           ]),
         ]),
         html.div([attribute.class("row")], []),
         html.ul(
-          [],
+          [attribute.style("list-style", "none"), attribute.class("post-list")],
           list.map(sorted, fn(p) {
-            html.li([], [
-              html.a([attribute.href("/blog/" <> p.slug)], [
-                element.text(p.title),
-              ]),
-            ])
+            post_card(p)
+            // html.li([], [
+            //   html.a([attribute.href("/blog/" <> p.slug)], [
+            //     element.text(p.title),
+            //   ]),
+            // ])
           }),
         ),
-        html.ul([attribute.style("list-style", "none")], [
-          html.li([], [
-            html.a(
-              [attribute.href("/archive"), attribute.class("archive-card")],
-              [
-                html.text("archive"),
-              ],
-            ),
-          ]),
-        ]),
       ]),
+      nav(),
     ]),
   ])
 }
+
+fn footer() -> Element(Nil) {
+
+        }
 
 fn post_is_in_archive(p: Post(Nil)) -> Bool {
   case p.extras |> dict.get("archive") {
@@ -170,8 +170,6 @@ fn post_is_in_archive(p: Post(Nil)) -> Bool {
 }
 
 fn post_card(post: Post(Nil)) -> Element(Nil) {
-  let title_image: String =
-    post.extras |> dict.get("title-image") |> result.unwrap("/:3.png")
   let image: String =
     post.extras |> dict.get("image") |> result.unwrap("/favicon.ico")
   html.li([], [
@@ -182,8 +180,11 @@ fn post_card(post: Post(Nil)) -> Element(Nil) {
       ],
       [
         html.div([attribute.class("post-card")], [
-          html.img([attribute.src(title_image), attribute.class("title-image")]),
           html.img([attribute.src(image), attribute.class("preview-image")]),
+          html.img([
+            attribute.src(get_title_img(post)),
+            attribute.class("title-image"),
+          ]),
           html.span([attribute.class("timestamp")], [
             html.text(
               post.date
@@ -200,10 +201,25 @@ fn post_card(post: Post(Nil)) -> Element(Nil) {
 fn nav() -> Element(Nil) {
   html.nav([], [
     html.menu([], [
-      html.li([], [html.text("ee")]),
-      html.li([], [html.text("ee")]),
+      html.li([], [
+        html.a([attribute.href("/")], [
+          html.img([attribute.src("/home.svg"), attribute.class("nav-item")]),
+        ]),
+      ]),
+      html.li([], [
+        html.a([attribute.href("/archive")], [
+          html.img([
+            attribute.src("/archive_small.svg"),
+            attribute.class("nav-item"),
+          ]),
+        ]),
+      ]),
     ]),
   ])
+}
+
+fn get_title_img(p: Post(Nil)) -> String {
+  p.extras |> dict.get("title-image") |> result.unwrap("/:3.png")
 }
 
 fn archive(posts: List(Post(Nil))) -> Element(Nil) {
@@ -214,9 +230,11 @@ fn archive(posts: List(Post(Nil))) -> Element(Nil) {
   html.html([], [
     head("Lovis' Blog Archive", "my thoughts, startpage"),
     html.body([], [
-      nav(),
       html.main([], [
-        html.h1([], [element.text("Lovis' Blog Archive")]),
+        html.img([
+          attribute.src("/archive.svg"),
+          attribute.style("height", "5em"),
+        ]),
         html.ul(
           [attribute.style("list-style", "none"), attribute.class("post-list")],
           list.map(sorted, fn(p) {
@@ -229,6 +247,7 @@ fn archive(posts: List(Post(Nil))) -> Element(Nil) {
           }),
         ),
       ]),
+      nav(),
     ]),
   ])
 }
