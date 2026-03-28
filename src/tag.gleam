@@ -37,8 +37,9 @@ pub fn tag(name: String) -> fn(List(Post(Nil))) -> Element(Nil) {
       html.body([], [
         html.main([], [
           html.img([
-            attribute.src("/" <> name <> ".svg"),
+            attribute.src("/tag/" <> name <> ".svg"),
             attribute.class("site-title"),
+            attribute.alt(name)
           ]),
           html.ul(
             [
@@ -60,27 +61,3 @@ pub fn tag(name: String) -> fn(List(Post(Nil))) -> Element(Nil) {
     ])
   }
 }
-// pub fn git_tag(posts: List(Post(Nil))) -> Element(Nil) {
-//   let sorted = list.sort(posts, fn(a, b) { timestamp.compare(b.date, a.date) })
-//
-//   html.html([], [
-//     head("Lovis' Blog Archive", "my thoughts, startpage"),
-//     html.body([], [
-//       html.main([], [
-//         html.img([attribute.src("/archive.svg"), attribute.class("site-title")]),
-//         html.ul(
-//           [attribute.style("list-style", "none"), attribute.class("post-list")],
-//           list.map(sorted, fn(p) {
-//             post_card(p)
-//             // html.li([], [
-//             // html.a([attribute.href("/blog/" <> p.slug)], [
-//             // element.text(p.title),
-//             // ]),
-//             // ])
-//           }),
-//         ),
-//       ]),
-//       nav(),
-//     ]),
-//   ])
-// }

@@ -33,6 +33,9 @@ pub fn config() {
   |> config.route("/tag/haskell", tag.tag("haskell"))
   |> config.route("/tag/programming", tag.tag("programming"))
   |> config.route("/tag/erlang", tag.tag("erlang"))
+  |> config.route("/tag/52posts", tag.tag("52posts"))
+  |> config.route("/tag/linux", tag.tag("linux"))
+  |> config.route("/tag/rust", tag.tag("rust"))
   |> config.feed(rss())
   |> config.sitemap(sitemap.new("/sitemap.xml"))
   |> config.robots(
@@ -63,6 +66,7 @@ fn blog_post_template(p: Post(Nil), _all_posts: List(Post(Nil))) -> Element(Nil)
           html.img([
             attribute.src(get_title_img(p)),
             attribute.class("title-image"),
+            attribute.alt(p.title),
           ]),
         ]),
         html.article([], [
@@ -153,6 +157,11 @@ fn archive(posts: List(Post(Nil))) -> Element(Nil) {
           attribute.src("/archive.svg"),
           attribute.class("site-title"),
           attribute.alt("Archive"),
+        ]),
+        html.p([], [
+          html.text(
+            "Here I put the articles from my old blogs. Some are quite old and most of them I wouldn't write like that if I were to write them today. I think (and hope) that shows some sort of growth :). Also because they were written for different blogging systems some stuff probably is broken (like tags).",
+          ),
         ]),
         html.ul(
           [attribute.style("list-style", "none"), attribute.class("post-list")],

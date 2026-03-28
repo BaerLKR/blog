@@ -33,6 +33,7 @@ pub fn nav(tags: option.Option(List(String))) -> Element(Nil) {
     html.li([], [
       html.a([attribute.href("/tag/" <> name)], [
         html.img([
+          attribute.alt(name),
           attribute.src(path),
           attribute.class("nav-item"),
         ]),
@@ -45,11 +46,13 @@ pub fn nav(tags: option.Option(List(String))) -> Element(Nil) {
         attribute.style("width", "100%"),
         attribute.style("color", "var(--dark)"),
       ]),
-      tag_link("programming", "/programming.svg"),
-      tag_link("git", "/git.svg"),
-      tag_link("nix", "/nix.svg"),
-      tag_link("haskell", "/haskell.svg"),
-      tag_link("erlang", "/erlang.svg"),
+      tag_link("programming", "/tag/programming.svg"),
+      tag_link("linux", "/tag/linux.svg"),
+      tag_link("rust", "/tag/rust.svg"),
+      tag_link("git", "/tag/git.svg"),
+      tag_link("nix", "/tag/nix.svg"),
+      tag_link("haskell", "/tag/haskell.svg"),
+      tag_link("erlang", "/tag/erlang.svg"),
     ]
     case tags {
       option.Some(ts) ->
@@ -69,7 +72,11 @@ pub fn nav(tags: option.Option(List(String))) -> Element(Nil) {
       [
         html.li([], [
           html.a([attribute.href("/")], [
-            html.img([attribute.src("/home.svg"), attribute.class("nav-item")]),
+            html.img([
+              attribute.src("/home.svg"),
+              attribute.class("nav-item"),
+              attribute.alt("home"),
+            ]),
           ]),
         ]),
         html.li([], [
@@ -77,6 +84,7 @@ pub fn nav(tags: option.Option(List(String))) -> Element(Nil) {
             html.img([
               attribute.src("/archive_small.svg"),
               attribute.class("nav-item"),
+              attribute.alt("archive"),
             ]),
           ]),
         ]),

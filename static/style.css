@@ -9,6 +9,9 @@
   --container-max: 1280px;
   --container-pad: 1rem;
 }
+img {
+  max-width: 100%;
+}
 html {
   /* cursor: */
   /*   url("/bunny.png") 16 16, */
