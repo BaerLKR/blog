@@ -105,6 +105,7 @@ pub fn post_card(post: Post(Nil)) -> Element(Nil) {
           html.img([
             attribute.src(get_title_img(post)),
             attribute.class("title-image"),
+            attribute.alt(post.title),
           ]),
           html.span([attribute.class("timestamp")], [
             html.text(

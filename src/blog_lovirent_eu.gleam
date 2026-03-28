@@ -62,8 +62,7 @@ fn blog_post_template(p: Post(Nil), _all_posts: List(Post(Nil))) -> Element(Nil)
         html.div([attribute.style("text-align", "center")], [
           html.img([
             attribute.src(get_title_img(p)),
-            attribute.style("height", "5em"),
-            attribute.style("padding", "1em"),
+            attribute.class("title-image"),
           ]),
         ]),
         html.article([], [
@@ -119,6 +118,7 @@ fn home_view(posts: List(Post(Nil))) -> Element(Nil) {
         html.div([attribute.class("row")], [
           html.img([
             attribute.src("/lovis_blog.svg"),
+            attribute.alt("Lovis' Blog"),
             attribute.class("site-title"),
           ]),
         ]),
@@ -149,7 +149,11 @@ fn archive(posts: List(Post(Nil))) -> Element(Nil) {
     head("Lovis' Blog Archive", "my thoughts, startpage"),
     html.body([], [
       html.main([], [
-        html.img([attribute.src("/archive.svg"), attribute.class("site-title")]),
+        html.img([
+          attribute.src("/archive.svg"),
+          attribute.class("site-title"),
+          attribute.alt("Archive"),
+        ]),
         html.ul(
           [attribute.style("list-style", "none"), attribute.class("post-list")],
           list.map(sorted, fn(p) {

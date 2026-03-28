@@ -10,9 +10,9 @@
   --container-pad: 1rem;
 }
 html {
-  cursor:
-    url("/bunny.png") 16 16,
-    auto;
+  /* cursor: */
+  /*   url("/bunny.png") 16 16, */
+  /*   auto; */
   background-color: var(--base);
   color: var(--color);
   border-box: border-box;
@@ -52,6 +52,8 @@ a {
   position: relative;
 }
 .title-image {
+  position: sticky;
+  top: 2rem;
   height: 5em;
   width: 100%;
 }
