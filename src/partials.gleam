@@ -42,10 +42,7 @@ pub fn nav(tags: option.Option(List(String))) -> Element(Nil) {
   }
   let tag_items = {
     let all = [
-      html.hr([
-        attribute.style("width", "100%"),
-        attribute.style("color", "var(--dark)"),
-      ]),
+      html.hr([]),
       tag_link("programming", "/tag/programming.svg"),
       tag_link("linux", "/tag/linux.svg"),
       tag_link("rust", "/tag/rust.svg"),
@@ -57,12 +54,9 @@ pub fn nav(tags: option.Option(List(String))) -> Element(Nil) {
     case tags {
       option.Some(ts) ->
         [
-          html.hr([
-            attribute.style("width", "100%"),
-            attribute.style("color", "var(--dark)"),
-          ]),
+          html.hr([]),
         ]
-        |> list.append(list.map(ts, fn(t) { tag_link(t, "/" <> t <> ".svg") }))
+        |> list.append(list.map(ts, fn(t) { tag_link(t, "/tag/" <> t <> ".svg") }))
       option.None -> all
     }
   }
@@ -95,7 +89,7 @@ pub fn nav(tags: option.Option(List(String))) -> Element(Nil) {
 }
 
 pub fn footer() -> Element(Nil) {
-  todo
+  html.footer([], [html.text("footer")])
 }
 
 pub fn post_card(post: Post(Nil)) -> Element(Nil) {

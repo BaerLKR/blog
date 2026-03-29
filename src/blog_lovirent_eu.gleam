@@ -77,6 +77,7 @@ fn blog_post_template(p: Post(Nil), _all_posts: List(Post(Nil))) -> Element(Nil)
         ]),
       ]),
       nav(option.Some(lib.get_tags(p))),
+      partials.footer(),
     ]),
   ])
 }
@@ -129,17 +130,11 @@ fn home_view(posts: List(Post(Nil))) -> Element(Nil) {
         html.div([attribute.class("row")], []),
         html.ul(
           [attribute.style("list-style", "none"), attribute.class("post-list")],
-          list.map(sorted, fn(p) {
-            post_card(p)
-            // html.li([], [
-            //   html.a([attribute.href("/blog/" <> p.slug)], [
-            //     element.text(p.title),
-            //   ]),
-            // ])
-          }),
+          list.map(sorted, fn(p) { post_card(p) }),
         ),
       ]),
       nav(option.None),
+      partials.footer(),
     ]),
   ])
 }
@@ -176,6 +171,7 @@ fn archive(posts: List(Post(Nil))) -> Element(Nil) {
         ),
       ]),
       nav(option.None),
+      partials.footer(),
     ]),
   ])
 }

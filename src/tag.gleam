@@ -39,7 +39,7 @@ pub fn tag(name: String) -> fn(List(Post(Nil))) -> Element(Nil) {
           html.img([
             attribute.src("/tag/" <> name <> ".svg"),
             attribute.class("site-title"),
-            attribute.alt(name)
+            attribute.alt(name),
           ]),
           html.ul(
             [

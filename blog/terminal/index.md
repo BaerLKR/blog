@@ -2,7 +2,7 @@
 title: Terminal
 date: 2023-05-17 17:31:00
 description: Das Terminal ist dein Freind, du musst nur noch seiner werden
-slug: temrinal
+slug: terminal
 title-image: /blog/terminal/title.svg
 tags: 52posts, linux
 archive: true
