@@ -42,7 +42,7 @@ a {
 }
 .title-image,
 .preview-image {
-  width: 50%;
+  width: clamp(10rem, 50%, 40rem);
   position: relative;
 }
 .title-image {
@@ -83,13 +83,15 @@ a {
   right: 0;
   margin: 0.2em;
 }
+nav {
+  top: 20vh;
+  position: sticky;
+}
 menu {
   border: solid 1px var(--dark);
   width: 6em;
   /* width: fix-content; */
   padding: 1.5rem;
-  top: 20vh;
-  position: sticky;
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -119,44 +121,40 @@ menu {
 }
 
 footer {
-  text-align: center;
   grid-column: 1 / span 2;
+  display: flex;
+  gap: 20%;
+  justify-content: center;
+  align-items: center;
 }
 
-/* sticky titles */
-/* footer with license and hand drawn images */
-
-/* @media screen and (width <= 100ch) { */
-/*   /* TODO: mobile  */
-*/
-/*   body { */
-/*     margin-top: 10rem; */
-/*     display: inline flow-root; */
-/*     /*   grid-template-columns: 1fr; */
-/*     max-width: 100%; */
-/*   } */
-/*   nav { */
-/*     width: 90ch; */
-/*     overflow: scroll; */
-/*   } */
-/*   menu { */
-/*     top: 1.5rem; */
-/*     left: 1rem; */
-/*     /* height: 4rem; */ */
-/*     /* flex-wrap: wrap; */ */
-/*     width: 90ch; */
-/*     flex-direction: row; */
-/*     position: fixed; */
-/*     overflow: scroll; */
-/*     hr { */
-/*       display: none; */
-/*       /* height: 100%; */ */
-/*       /* width: 2px; */ */
-/*     } */
-/*     align-items: center; */
-/*     background-color: var(--base); */
-/*   } */
-/*   footer { */
-/*     display: none; */
-/*   } */
-/* } */
+@media screen and (width <= 100ch) {
+  body {
+    margin-top: 10rem;
+    display: inline flow-root;
+    max-width: 100ch;
+  }
+  nav {
+    width: 80ch;
+    position: fixed;
+    display: block;
+    overflow: scroll;
+    top: 1.5rem;
+  }
+  menu {
+    flex-direction: row;
+    width: max-content;
+    display: flex;
+    hr {
+      /* display: none; */
+      height: 2rem;
+      width: 2px;
+    }
+    li {
+      height: 2rem;
+      min-width: 4rem;
+    }
+    align-items: center;
+    background-color: var(--base);
+  }
+}

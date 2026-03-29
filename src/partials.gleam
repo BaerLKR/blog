@@ -56,7 +56,9 @@ pub fn nav(tags: option.Option(List(String))) -> Element(Nil) {
         [
           html.hr([]),
         ]
-        |> list.append(list.map(ts, fn(t) { tag_link(t, "/tag/" <> t <> ".svg") }))
+        |> list.append(
+          list.map(ts, fn(t) { tag_link(t, "/tag/" <> t <> ".svg") }),
+        )
       option.None -> all
     }
   }
@@ -89,12 +91,17 @@ pub fn nav(tags: option.Option(List(String))) -> Element(Nil) {
 }
 
 pub fn footer() -> Element(Nil) {
-  html.footer([], [html.text("footer")])
+  html.footer([], [
+    html.a([attribute.href("https://lovirent.eu")], [
+      html.img([attribute.src("https://lovirent.eu/88x31.gif")]),
+    ]),
+    html.a([attribute.href("https://eupl.eu/1.2/en/")], [html.text("EUPLv1.2")]),
+  ])
 }
 
 pub fn post_card(post: Post(Nil)) -> Element(Nil) {
-  let image: String =
-    post.extras |> dict.get("image") |> result.unwrap("/favicon.ico")
+  // let image: String =
+  // post.extras |> dict.get("image") |> result.unwrap("/favicon.ico")
   html.li([], [
     html.a(
       [
