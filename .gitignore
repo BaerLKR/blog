@@ -2,4 +2,6 @@
 *.ez
 /build
 /dist
+.direnv/
+/result
 erl_crash.dump
