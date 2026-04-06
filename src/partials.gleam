@@ -11,7 +11,7 @@ import lustre/attribute
 import lustre/element.{type Element}
 import lustre/element/html
 
-pub fn head(descr: String, title: String) -> Element(Nil) {
+pub fn head(title: String, descr: String) -> Element(Nil) {
   html.head([], [
     html.meta([attribute.charset("UTF-8")]),
     html.link([attribute.rel("stylesheet"), attribute.href("/style.css")]),
