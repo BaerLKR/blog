@@ -36,6 +36,7 @@ pre {
   background-color: var(--dark);
   padding: 1rem;
   border: solid 2px var(--light);
+  overflow: scroll;
 }
 a {
   color: var(--light);
