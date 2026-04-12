@@ -15,6 +15,10 @@ pub fn head(title: String, descr: String) -> Element(Nil) {
   html.head([], [
     html.meta([attribute.charset("UTF-8")]),
     html.link([attribute.rel("stylesheet"), attribute.href("/style.css")]),
+    html.meta([
+      attribute.name("viewport"),
+      attribute.content("width=device-width, initial-scale=1"),
+    ]),
     html.link([attribute.rel("icon"), attribute.href("/favicon.ico")]),
     html.meta([
       attribute.name("viewport"),
