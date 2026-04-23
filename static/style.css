@@ -29,6 +29,7 @@ main {
   --max-w: 80ch;
   max-width: var(--max-w);
   min-height: calc(100vh - 3rem);
+  text-wrap-mode: wrap;
   /* width: clamp(calc(100vw - 0.1em), 75%, var(--max-w)); */
   margin: 0 clamp(1em, 5%, calc(100vw - var(--max-w) / 2));
 }
@@ -37,6 +38,7 @@ pre {
   padding: 1rem;
   border: solid 2px var(--light);
   overflow: scroll;
+  max-width: 80vw;
 }
 a {
   color: var(--light);
