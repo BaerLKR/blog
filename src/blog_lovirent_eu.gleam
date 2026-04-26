@@ -36,6 +36,7 @@ pub fn config() {
   |> config.route("/tag/52posts", tag.tag("52posts"))
   |> config.route("/tag/linux", tag.tag("linux"))
   |> config.route("/tag/rust", tag.tag("rust"))
+  |> config.route("/tag/gpg", tag.tag("gpg"))
   |> config.feed(rss())
   |> config.sitemap(sitemap.new("/sitemap.xml"))
   |> config.robots(
