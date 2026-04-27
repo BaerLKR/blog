@@ -54,6 +54,20 @@ pub fn rss() {
   feed.new("Lovis' Blog", site_url, "my thoughts")
   |> feed.language("en-us")
   |> feed.generator("Blogatto")
+  |> feed.serialize(fn(meta: feed.FeedMetadata(Nil)) {
+    feed.FeedItem(
+      title: meta.post.title,
+      description: meta.post.description <> "\n read more <a href=\""<> meta.post.url <>"\">here</a>",
+      link: option.Some(meta.url),
+      author: option.Some("Lovis Rentsch"),
+      comments: option.None,
+      source: option.None,
+      pub_date: option.Some(meta.post.date),
+      categories: [],
+      enclosure: option.None,
+      guid: option.Some(meta.url),
+    )
+  })
 }
 
 fn blog_post_template(p: Post(Nil), _all_posts: List(Post(Nil))) -> Element(Nil) {
